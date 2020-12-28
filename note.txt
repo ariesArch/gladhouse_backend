@@ -1,0 +1,112 @@
+request => response 
+www.google.com (domain) => google page response
+Laravel
+request -> route
+
+cities 
+======
+id name     
+1. Yangon
+2. Mandalay  
+zones 
+======
+id  name    city_id  
+1.  Hlaing  1 
+2.  Ahlone  1
+
+postal_codes
+============
+id  code 
+1.  001
+2.  002
+
+
+cities[
+    document:1{
+        {name:'Yangon'}
+    }
+    document:1{
+        {name:'Mandalay'},
+    }
+]
+
+zones[
+    document:1{
+        {name:'Hlaing',city_name:'Yangon'},
+    }
+    document:2{
+        {name:'Bahan',city_name:'Yangon'},
+    }
+]
+====================
+
+data storage 
+relational DBMS , MSQL,Sqlite,Postgresql store in table form 
+- Database => Tables => Model(Eloquent ORM)
+- glad-house => users => User 
+- glad-house => staff_types => StaffType
+- glad-house => staffs => Staff  
+- glad-house => roles => Role  
+- glad-house => departments => Department   
+- glad-house => cities =>City   
+- glad-house => zones =>Zone  
+=======================================
+Table Columns                   Model       Properties
+roles {id,name,description}     Role        {id,name,description}
+=======================================
+non-RDBMS MongoDB,Cassendra,Firebase, store in json object form 
+=======================================
+class Role {
+    //properties 
+    private $id;
+    private $name;
+    private $description;
+    
+    //method(function)
+    function getName() {
+        return $this->name;
+    }
+}
+$role = new Role();
+$role->getName();
+
+$blueprint = new BluePrint();
+function($blueprint){
+
+}
+============================
+Model
+======
+php artisan make:model City
+php artisan make:model City --migration 
+php artisan make:model City -m 
+Migration 
+==========
+php artisan make:migration create_cities_table 
+php artisan make:migration create_meta_data_cities_table --create=cities 
+php artisan make:migration add_name_mm_to_cities_table 
+php artisan make:migration add_name_mm_to_meta_data_cities_table --table=cities 
+==========================================
+php artisan migrate
+==========================================
+php artisan make:factory City --model=City
+php artisan tinker( to run Factory in cmd)
+in tinker shell ==>
+factory(App\City::class,10)->create();
+Insert foreign key in Factory: 
+'city_id' => function(){
+    return City::all()->random()->id;
+}
+===========================================
+php artisan make:controller CityController --resource
+===========================================
+Yangon => Ahlone, Hlaing, 
+Yangon => Code (postal_codes)
+==============================================
+Model(Zone) => tables(zones) => foreign_key(city_id) => foreign(city())
+==============================================
+php artisan make:seeder CityTableSeeder
+write code in run() {
+
+}
+php artisan db:seed --class=CityTableSeeder

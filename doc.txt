@@ -1,0 +1,17 @@
+Backend
+git clone git@github.com:kyawyenaing/gladhouse_backend.git
+git fetch --all 
+git branch 
+composer install
+git checkout feature/meta_data
+create database in phpmyadmin "glad_house"
+edit database connection in .env 
+php artisan migrate 
+run required seeder files 
+============================================================
+git clone git@github.com:kyawyenaing/gladhous_frontend.git
+git fetch --all 
+git branch 
+npm install
+git checkout meta_data
+=============================================================
