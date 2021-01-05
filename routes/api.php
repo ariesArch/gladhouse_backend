@@ -19,4 +19,5 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::ApiResource('cities', 'CityController');
 Route::ApiResource('zones', 'ZoneController');
+Route::ApiResource('departments', 'DepartmentController');
 // Route::get('zones/{zone}', 'ZoneController@show');
