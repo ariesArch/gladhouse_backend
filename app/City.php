@@ -10,4 +10,8 @@ class City extends Model
     {
         return $this->hasMany(Zone::class);
     }
+    public function branches()
+    {
+        return $this->hasMany(Branch::class);
+    }
 }

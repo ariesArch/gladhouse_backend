@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Zone extends Model
+class Branch extends Model
 {
-    //belongsTo City
+
     public function city()
     {
         return $this->belongsTo(City::class);
     }
-    public function branches()
+    public function zone()
     {
-        return $this->hasMany(Branch::class);
+        return $this->belongsTo(Zone::class);
     }
 }

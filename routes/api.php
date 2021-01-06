@@ -22,4 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace'=>'Web\Api\v1','prefix'=>'v1'],function(){
     Route::ApiResource('cities', 'CityController');
     Route::ApiResource('zones', 'ZoneController');
+    Route::ApiResource('branches', 'BranchController');
+    Route::ApiResource('roles', 'RoleController');
+    Route::ApiResource('items', 'ItemController');
+    Route::ApiResource('departments', 'DepartmentController');
+
 });
