@@ -17,5 +17,6 @@ class BranchController extends Controller
     public function show(Branch $branches)
     {
         return $branches->load(['city', 'zone']);
+          
     }
 }
