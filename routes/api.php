@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-Route::ApiResource('cities', 'CityController');
-Route::ApiResource('zones', 'ZoneController');
+
 // Route::get('zones/{zone}', 'ZoneController@show');
+Route::group(['namespace'=>'Web\Api\v1','prefix'=>'v1'],function(){
+    Route::ApiResource('cities', 'CityController');
+    Route::ApiResource('zones', 'ZoneController');
+});
