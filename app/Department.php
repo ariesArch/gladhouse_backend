@@ -7,4 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     //
+    public function staffs()
+    {
+        return $this->hasMany(Staff::class);
+    }
 }

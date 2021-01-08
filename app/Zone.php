@@ -15,4 +15,8 @@ class Zone extends Model
     {
         return $this->hasMany(Branch::class);
     }
+    public function staffs()
+    {
+        return $this->hasMany(Staff::class);
+    }
 }

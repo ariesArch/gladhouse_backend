@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Department;
+namespace App\Http\Controllers\Web\Api\v1;
+use App\Staff;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DepartmentController extends Controller
+class StaffController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class DepartmentController extends Controller
     public function index()
     {
         //
-        $departments=Department::all();
-        return $departments;
+        $staffs=Staff::with(['city', 'zone','department'])->get();
+        return $staffs;
     }
 
     /**
@@ -35,9 +36,12 @@ class DepartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateStaffRequest $request)
     {
-        //
+        $staff = new Staff;
+        $staff->username= $request->username;
+        $staff->is_present = $request->is_present;
+        return response()->json($staff);
     }
 
     /**

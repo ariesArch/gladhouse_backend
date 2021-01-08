@@ -15,4 +15,8 @@ class Branch extends Model
     {
         return $this->belongsTo(Zone::class);
     }
+    public function staffs()
+    {
+        return $this->hasMany(Staff::class);
+    }
 }
