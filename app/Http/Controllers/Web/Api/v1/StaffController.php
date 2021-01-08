@@ -16,7 +16,7 @@ class StaffController extends Controller
     public function index()
     {
         //
-        $staffs=Staff::with(['city', 'zone','department'])->get();
+        $staffs=Staff::with(['city', 'zone','department','role','branch'])->get();
         return $staffs;
     }
 
