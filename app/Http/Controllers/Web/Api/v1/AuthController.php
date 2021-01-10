@@ -24,12 +24,17 @@ class AuthController extends Controller
         }
         if(auth()->validate($credentials)) {
             $remember_token = JWTAuth::attempt($credentials);
-            if(is_numeric($request->username)) {
-                $staff = DB::table('staffs')->where('phone_number',$request->username)->first();
-            }else{
-                $staff = DB::table('staffs')->where('username',$request->username)->first();
-            }
+            $staff = DB::table('staffs')->where('username',$request->username)->first();
             Staff::find($staff->id)->update(['remember_token'=>$remember_token]);
+            return $this->respondWithToken($remember_token);
+        }else if(is_numeric($request->username)){
+            $credentials = ['phone_number'=>$request->username,'password'=>$request->password];
+            if(!auth()->validate($credentials)){
+                return response()->json(['status' => 2, 'message' => 'Wrong Credentials'], 422);
+            }
+            $remember_token = JWTAuth::attempt($credentials);
+            $staff = DB::table('staffs')->where('phone_number', $request->username)->first();
+            Staff::find($staff->id)->update(['remember_token' => $remember_token]);
             return $this->respondWithToken($remember_token);
         }else{
             return response()->json(['status'=>2,'message'=>'Wrong Credentials'],422);
