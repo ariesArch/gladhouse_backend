@@ -15,12 +15,17 @@ class CreateMetaDataBranchesTable extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('city_id');
-            $table->bigInteger('zone_id');
-            $table->string('name_mm');
-            $table->string('name_en');
+            $table->unsignedBigInteger('city_id');
+            $table->unsignedBigInteger('zone_id');
+            $table->string('name');
+            $table->string('name_mm')->nullable();;
             $table->longText('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('restrict');
+            $table->foreign('zone_id')->references('id')->on('zones')->onDelete('restrict');
+
         });
     }
 
@@ -31,6 +36,8 @@ class CreateMetaDataBranchesTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('branches');
+        Schema::enableForeignKeyConstraints();
     }
 }

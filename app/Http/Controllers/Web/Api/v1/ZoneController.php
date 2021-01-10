@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Web\Api\v1;
 
-use App\City;
 use App\Http\Controllers\Controller;
-use App\Zone;
 use App\Http\Requests\Zone\CreateZoneRequest;
 use Illuminate\Http\Request;
+use App\Models\City;
+use App\Models\Zone;
 
 class ZoneController extends Controller
 {

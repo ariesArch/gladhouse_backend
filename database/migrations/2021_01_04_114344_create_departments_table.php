@@ -15,10 +15,11 @@ class CreateDepartmentsTable extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->string('name_mm');
-            $table->string('name_en');
+            $table->string('name');
+            $table->string('name_mm')->nullable();;
             $table->longText('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -29,6 +30,8 @@ class CreateDepartmentsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('departments');
+        Schema::enableForeignKeyConstraints();
     }
 }

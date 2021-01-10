@@ -15,11 +15,12 @@ class CreateMetadataCitiesTable extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->string('name_mm');
-            $table->string('name_en');
-            $table->longText('description')->nullable();
+            $table->string('name');
+            $table->string('name_mm')->nullable();;
             $table->boolean('is_available_d2d')->default(0);
+            $table->longText('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +31,9 @@ class CreateMetadataCitiesTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('cities');
+        Schema::enableForeignKeyConstraints();
+
     }
 }

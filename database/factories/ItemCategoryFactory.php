@@ -3,11 +3,10 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use Faker\Generator as Faker;
-use App\Models\Department;
+use App\Models\ItemCategory;
 
-$factory->define(Department::class, function (Faker $faker) {
+$factory->define(ItemCategory::class, function (Faker $faker) {
     return [
-        //
         'name' => $faker->name,
         'name_mm' => $faker->name,
         'description' => $faker->sentence,

@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Branch;
 use Faker\Generator as Faker;
-use App\City;
-use App\Zone;
+use App\Models\Branch;
+use App\Models\City;
+use App\Models\Zone;
 
 $factory->define(Branch::class, function (Faker $faker) {
     return [
@@ -16,8 +16,8 @@ $factory->define(Branch::class, function (Faker $faker) {
         'zone_id' => function () {
             return Zone::all()->random()->id;
         },
-        'name_mm' => $faker->name,
-        'name_en' => $faker->name,
+        'name' => 'Glad House',
+        'name_mm' => 'Glad House',
         'description' => $faker->sentence,
     ];
 });

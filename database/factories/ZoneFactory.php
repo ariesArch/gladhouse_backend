@@ -2,17 +2,17 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Zone;
 use Faker\Generator as Faker;
-use App\City;
+use App\Models\City;
+use App\Models\Zone;
 
 $factory->define(Zone::class, function (Faker $faker) {
     return [
         'city_id' => function () {
             return City::all()->random()->id;
         },
+        'name' => $faker->name,
         'name_mm' => $faker->name,
-        'name_en' => $faker->name,
         'description' => $faker->sentence,
     ];
 });

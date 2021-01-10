@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Branch;
-class BranchTableSeeder extends Seeder
+
+class ItemTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,5 @@ class BranchTableSeeder extends Seeder
     public function run()
     {
         //
-        factory(Branch::class, 10)->create();
     }
 }

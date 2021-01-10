@@ -1,19 +1,21 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Branch extends Model
+class Zone extends Model
 {
-
+    use SoftDeletes;
+    //belongsTo City
     public function city()
     {
         return $this->belongsTo(City::class);
     }
-    public function zone()
+    public function branches()
     {
-        return $this->belongsTo(Zone::class);
+        return $this->hasMany(Branch::class);
     }
     public function staffs()
     {

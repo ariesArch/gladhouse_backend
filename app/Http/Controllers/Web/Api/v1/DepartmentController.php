@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Web\Api\v1;
-use App\Department;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Department;
 
 class DepartmentController extends Controller
 {

@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Web\Api\v1;
-
-use App\City;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\City\CreateCityRequest;
 use Illuminate\Http\Request;
+use App\Models\City;
+use App\Http\Requests\City\CreateCityRequest;
 
 class CityController extends Controller
 {
