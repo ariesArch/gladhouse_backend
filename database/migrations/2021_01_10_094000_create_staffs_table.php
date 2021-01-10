@@ -15,17 +15,18 @@ class CreateStaffsTable extends Migration
     {
         Schema::create('staffs', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('username')->unique();
+            $table->string('phone_number')->unique()->nullable();
+            $table->string('email')->unique()->nullable();
+            $table->boolean('is_present')->default(0);
+            $table->string('password');
             $table->unsignedBigInteger('city_id');
             $table->unsignedBigInteger('zone_id');
             $table->unsignedBigInteger('branch_id');
             $table->unsignedBigInteger('department_id');
             $table->unsignedBigInteger('role_id');
-            $table->string('name');
-            $table->string('username')->unique();
-            $table->string('phone_number')->unique()->nullable();
-            $table->boolean('is_present')->default(0);
-            $table->string('password');
-            $table->rememberToken()->nullable();
+            $table->longText('remember_token')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

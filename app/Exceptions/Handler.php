@@ -3,6 +3,9 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,11 +53,19 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        //status_code 422
         if ($exception instanceof ValidationException) {
             return response()->json([
                 'status' => 2,
                 'message'  => $exception->validator->getMessageBag()
-            ], 422);
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        //status_code 405
+        if($exception instanceof MethodNotAllowedHttpException){
+            return response()->json([
+                'status'=>3,
+                'message'=>'Invalid method for this request'
+            ],Response::HTTP_METHOD_NOT_ALLOWED);
         }
         return parent::render($request, $exception);
     }

@@ -13,7 +13,7 @@ class Staff extends Authenticatable implements JWTSubject
     protected $table = 'staffs';
 
     protected $guard_name = 'api';
-
+    protected $fillable = ['remember_token'];
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

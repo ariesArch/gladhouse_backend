@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class City extends Model
 {
     use SoftDeletes;
+    protected $casts = ['is_available_d2d'=>'boolean'];
     public function zones()
     {
         return $this->hasMany(Zone::class);
