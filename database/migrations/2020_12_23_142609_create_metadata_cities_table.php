@@ -15,8 +15,8 @@ class CreateMetadataCitiesTable extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('name_mm')->nullable();;
+            $table->string('name')->unique();
+            $table->string('name_mm')->unique()->nullable();;
             $table->boolean('is_available_d2d')->default(0);
             $table->longText('description')->nullable();
             $table->timestamps();

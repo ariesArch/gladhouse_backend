@@ -17,8 +17,8 @@ class CreateMetaDataBranchesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('city_id');
             $table->unsignedBigInteger('zone_id');
-            $table->string('name');
-            $table->string('name_mm')->nullable();;
+            $table->string('name')->unique();
+            $table->string('name_mm')->unique()->nullable();;
             $table->longText('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

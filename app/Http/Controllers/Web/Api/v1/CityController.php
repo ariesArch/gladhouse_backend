@@ -3,30 +3,55 @@
 namespace App\Http\Controllers\Web\Api\v1;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\City;
+use Illuminate\Http\Response;
 use App\Http\Requests\City\CreateCityRequest;
+use App\Http\Requests\City\UpdateCityRequest;
 use App\Http\Resources\City\CityCollection;
 use App\Http\Resources\City\CityResource;
-
+use App\Repositories\Web\Api\v1\CityRepository;
+use App\Models\City;
 class CityController extends Controller
 {
+    protected $cityRepo;
+    public function __construct(CityRepository $cityRepo) {
+        $this->cityRepo = $cityRepo;
+    }
+
     public function index()
     {
-        $cities = City::all();
+        $cities =  $this->cityRepo->all();
+        if(!$cities) {
+            return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
         return new CityCollection($cities);
     }
 
     public function store(CreateCityRequest $request)
     {
-        $city = new City;
-        $city->name_mm = $request->name_mm;
-        $city->name_en = $request->name_en;
-        $city->description = $request->description;
-        $city->is_available_d2d = $request->is_available_d2d;
+        $city = $this->cityRepo->create($request->all());
+        if (!$city) {
+            return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
         return new CityResource($city);
     }
 
     public function show(City $city) {
         return new CityResource($city);
+    }
+
+    public function update(City $city, UpdateCityRequest $request) {
+        $city = $this->cityRepo->update($city,$request->all());
+        if (!$city) {
+            return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        return new CityResource($city);
+    }
+
+    public function destroy(City $city) {
+        $deleted = $this->cityRepo->delete($city);
+        if (!$deleted) {
+            return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        return response()->json(['status' => 1,'message'=>'City was deleted'], Response::HTTP_OK);
     }
 }

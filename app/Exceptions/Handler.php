@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -64,8 +65,17 @@ class Handler extends ExceptionHandler
         if($exception instanceof MethodNotAllowedHttpException){
             return response()->json([
                 'status'=>3,
-                'message'=>'Invalid method for this request'
+                'message'=>'Invalid method for this request!'
             ],Response::HTTP_METHOD_NOT_ALLOWED);
+        }
+
+        if ($exception instanceof ModelNotFoundException) {
+            $modelName = class_basename($exception->getModel());
+            $message = "Cannot find your requested {$modelName}!";
+            return response()->json([
+                'status' => 2,
+                'message' => $message,
+            ], Response::HTTP_OK);
         }
         return parent::render($request, $exception);
     }

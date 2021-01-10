@@ -15,8 +15,8 @@ class CreateMetaDataRolesTable extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('name_mm')->nullable();;
+            $table->string('name')->unique();
+            $table->string('name_mm')->unique()->nullable();;
             $table->longText('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

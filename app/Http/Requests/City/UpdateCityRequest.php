@@ -4,7 +4,7 @@ namespace App\Http\Requests\City;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCityRequest extends FormRequest
+class UpdateCityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class CreateCityRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|unique:cities,name'
+            'name' => 'required|string|unique:cities,name,' . $this->route('city')->id,
         ];
     }
 }

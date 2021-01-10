@@ -16,6 +16,7 @@ class CityResource extends JsonResource
     {
         // return parent::toArray($request);
         return [
+            'id'=>$this->id,
             'name'=>$this->name,
             'name_mm'=>$this->name_mm,
             'is_available_d2d'=>$this->is_available_d2d,

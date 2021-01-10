@@ -16,8 +16,8 @@ class CreateMetadataZonesTable extends Migration
         Schema::create('zones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('city_id');
-            $table->string('name');
-            $table->string('name_mm')->nullable();;
+            $table->string('name')->unique();
+            $table->string('name_mm')->unique()->nullable();;
             $table->boolean('is_deliver')->default(0);
             $table->longText('description');
             $table->timestamps();

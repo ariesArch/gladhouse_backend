@@ -16,8 +16,8 @@ $factory->define(Branch::class, function (Faker $faker) {
         'zone_id' => function () {
             return Zone::all()->random()->id;
         },
-        'name' => 'Glad House',
-        'name_mm' => 'Glad House',
+        'name' => $faker->name,
+        'name_mm' => $faker->name,
         'description' => $faker->sentence,
     ];
 });

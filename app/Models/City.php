@@ -9,6 +9,9 @@ class City extends Model
 {
     use SoftDeletes;
     protected $casts = ['is_available_d2d'=>'boolean'];
+    protected $fillable = [
+        'name', 'name_mm','is_available_d2d'
+    ];
     public function zones()
     {
         return $this->hasMany(Zone::class);
