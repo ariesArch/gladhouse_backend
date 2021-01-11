@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Zone;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\FormRequest;
 
 class CreateZoneRequest extends FormRequest
 {
