@@ -47,41 +47,55 @@ abstract class BaseRepository implements RepositoryContract
     /**
      * Create modal collection
      *
-     * @param $request
+     * @param $data
      * @return bool|Object
      */
     public function create(array $data)
     {
-        if (empty($request)) {
-            return false;
-        }
-        $result = $this->model::create();
-        if($result){
-            return $result->refresh();
-        }
+        if (empty($data)) return false;
+        $result = $this->model::create($data);
+        if($result) return $result->refresh();
         return false;
+    }
+
+    /**
+     * Find Row id form model list
+     *
+     * @param $primaryKey
+     * @return Object
+     */
+    public function find(int $primaryKey)
+    {
+        return $this->model::find($primaryKey);
+    }
+
+    /**
+     * Find Row id form model list
+     *
+     * @param $primaryKey
+     * @return Object
+     */
+    public function findOrFail(int $primaryKey)
+    {
+        return $this->model::findOrFail($primaryKey);
     }
 
     /**
      * Update model
      *
      * @param integer $primaryKey
-     * @param $request
+     * @param $data
      * @return bool|Object
      */
-    public function update($model,array $data)
+    public function update(int $id,array $data)
     {
-        if (!$model || empty($data)) {
-            return false;
-        }
-        if ($model->update($data)) {
-            return $model->refresh();
-        }
+        if (!$id || empty($data)) return false;
+        if($this->findOrFail($id)->update($data)) return $this->find($id)->refresh();
         return false;
     }
 
-    public function delete($model) {
-        if(!$model) return false;
-        return $model->delete();
+    public function delete(int $id) {
+        if(!$id) return false;
+        return $this->findOrFail($id)->delete();
     }
 }

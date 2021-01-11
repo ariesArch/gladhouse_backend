@@ -9,7 +9,6 @@ use App\Http\Requests\City\UpdateCityRequest;
 use App\Http\Resources\City\CityCollection;
 use App\Http\Resources\City\CityResource;
 use App\Repositories\Web\Api\v1\CityRepository;
-use App\Models\City;
 class CityController extends Controller
 {
     protected $cityRepo;
@@ -35,20 +34,24 @@ class CityController extends Controller
         return new CityResource($city);
     }
 
-    public function show(City $city) {
-        return new CityResource($city);
-    }
-
-    public function update(City $city, UpdateCityRequest $request) {
-        $city = $this->cityRepo->update($city,$request->all());
+    public function show($id) {
+        $city = $this->cityRepo->find($id);
         if (!$city) {
             return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
         return new CityResource($city);
     }
 
-    public function destroy(City $city) {
-        $deleted = $this->cityRepo->delete($city);
+    public function update($id, UpdateCityRequest $request) {
+        $city = $this->cityRepo->update($id,$request->all());
+        if (!$city) {
+            return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        return new CityResource($city);
+    }
+
+    public function destroy($id) {
+        $deleted = $this->cityRepo->delete($id);
         if (!$deleted) {
             return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
