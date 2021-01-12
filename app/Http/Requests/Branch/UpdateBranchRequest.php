@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Branch;
 
-use App\Http\Requests\FormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreateBranchRequest extends FormRequest
+class UpdateBranchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class CreateBranchRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:branches,name'
+            'name' => 'required|string|unique:branches,name',
         ];
     }
 }
