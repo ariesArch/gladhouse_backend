@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Branch;
+namespace App\Http\Requests\ItemCategory;
 
-use App\Http\Requests\FormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreateBranchRequest extends FormRequest
+class UpdateItemCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class CreateBranchRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,7 +24,7 @@ class CreateBranchRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:branches,name'
+            'name' => 'required|string|unique:itemcategories,name',
         ];
     }
 }
