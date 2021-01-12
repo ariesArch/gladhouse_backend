@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Staff;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\FormRequest;
 
 class CreateStaffRequest extends FormRequest
 {

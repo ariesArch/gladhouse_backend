@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Department;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\FormRequest;
 
 class CreateDepartmentRequest extends FormRequest
 {
