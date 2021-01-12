@@ -29,10 +29,6 @@ Route::group(['namespace' => 'Web\Api\v1', 'prefix' => 'v1'], function () {
     Route::ApiResource('items', 'ItemController');
     Route::ApiResource('staffs', 'StaffController');
     Route::ApiResource('departments', 'DepartmentController');
-<<<<<<< HEAD
     Route::ApiResource('itemsubcategories','ItemSubCategoryController');
-});
-=======
     Route::ApiResource('itemcategories', 'ItemCategoryController');
 });
->>>>>>> 63c0b001137c7285023fee142628b1bc7f8f0b56
