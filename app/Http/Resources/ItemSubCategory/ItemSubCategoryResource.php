@@ -3,6 +3,7 @@
 namespace App\Http\Resources\ItemSubCategory;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\ItemCategory\ItemCategoryResource;
 
 class ItemSubCategoryResource extends JsonResource
 {
@@ -15,12 +16,12 @@ class ItemSubCategoryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=>$this->id,
-            'item_category_id'=>$this->item_category_id,
+            'id' => $this->id,
             'name'=>$this->name,
             'name_mm'=>$this->name_mm,
             'is_discount'=>$this->is_discount,
-            'description'=>$this->description
+            'descrioption'=>$this->description,
+            'item_category_id'=>ItemCategoryResource::make($this->whenLoaded('item_category'))
         ];
     }
     /**
