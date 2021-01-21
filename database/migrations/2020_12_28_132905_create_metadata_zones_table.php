@@ -19,10 +19,10 @@ class CreateMetadataZonesTable extends Migration
             $table->string('name')->unique();
             $table->string('name_mm')->unique()->nullable();;
             $table->boolean('is_deliver')->default(0);
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            
+
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('restrict');
         });
     }
