@@ -12,4 +12,8 @@ class ItemCategory extends Model
     protected $fillable = [
         'name', 'name_mm', 'description'
     ];
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }

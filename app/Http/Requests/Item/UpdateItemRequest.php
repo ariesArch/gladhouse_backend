@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Staff;
+namespace App\Http\Requests\Item;
 
-use App\Http\Requests\FormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreateStaffRequest extends FormRequest
+class UpdateItemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class CreateStaffRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,8 +24,7 @@ class CreateStaffRequest extends FormRequest
     public function rules()
     {
         return [
-            'username'=>'required',
-            // 'is_presetn'=>'required'
+            //
         ];
     }
 }

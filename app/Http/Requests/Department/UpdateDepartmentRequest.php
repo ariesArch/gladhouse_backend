@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Staff;
+namespace App\Http\Requests\Department;
 
-use App\Http\Requests\FormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreateStaffRequest extends FormRequest
+class UpdateDepartmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,7 +16,7 @@ class CreateStaffRequest extends FormRequest
         return true;
     }
 
-    /**
+     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -24,8 +24,7 @@ class CreateStaffRequest extends FormRequest
     public function rules()
     {
         return [
-            'username'=>'required',
-            // 'is_presetn'=>'required'
+            'name' => 'required|string|unique:departments,name,' . $this->route('department')->id,
         ];
     }
 }
