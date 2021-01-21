@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\ItemSubCategory;
+namespace App\Http\Requests\Item;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateItemSubCategoryRequest extends FormRequest
+class UpdateItemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdateItemSubCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -25,7 +25,6 @@ class UpdateItemSubCategoryRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|string|unique:item_sub_categories,name',
         ];
     }
 }

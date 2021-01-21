@@ -32,13 +32,13 @@ class ItemSubCategoryController extends Controller
         }
         return new ItemSubCategoryCollection($item_sub_categories->load(['item_category']));
     }
-    public function store(CreateItemSubCategoryRequest $REQUEST)
+    public function store(CreateItemSubCategoryRequest $request)
     {
-        $item_sub_categories =$this->itemsubRepo->all();
-        if(!$item_sub_categories){
+        $item_sub_category =$this->itemsubRepo->create($request->all());
+        if(!$item_sub_category){
             return response() ->json(['error' => 'Someting went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new ItemSubCategoryResource($item_sub_categories);
+        return new ItemSubCategoryResource($item_sub_category->load(['item_category']));
     }
 
     public function show($id) {
@@ -46,14 +46,14 @@ class ItemSubCategoryController extends Controller
         if (!$item_sub_category) {
             return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new ItemSubCategoryResource($item_sub_category);
+        return new ItemSubCategoryResource($item_sub_category->load(['item_category']));
     }
     public function update($id, UpdateItemSubCategoryRequest $request) {
         $item_sub_categories = $this->itemsubRepo->update($id,$request->all());
         if (!$item_sub_categories) {
             return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new ItemSubCategoryResource($item_sub_categories);
+        return new ItemSubCategoryResource($item_sub_category->load(['item_category']));
     }
     public function destroy($id) {
         $deleted = $this->itemsubRepo->delete($id);

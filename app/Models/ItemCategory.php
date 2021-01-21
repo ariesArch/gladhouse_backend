@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ItemCategory extends Model
 {
     use SoftDeletes;
-    public function item_sub_categories()
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
+    public function itemsubcategories()
     {
         return $this->hasMany(ItemSubCategory::class);
     }

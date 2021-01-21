@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\ItemSubCategory;
+namespace App\Http\Requests\Department;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateItemSubCategoryRequest extends FormRequest
+class UpdateDepartmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,7 +16,7 @@ class UpdateItemSubCategoryRequest extends FormRequest
         return true;
     }
 
-    /**
+     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -24,8 +24,7 @@ class UpdateItemSubCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-            'name' => 'required|string|unique:item_sub_categories,name',
+            'name' => 'required|string|unique:departments,name,' . $this->route('department')->id,
         ];
     }
 }
