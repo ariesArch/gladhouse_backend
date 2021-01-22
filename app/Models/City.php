@@ -24,4 +24,8 @@ class City extends Model
     {
         return $this->hasMany(Staff::class);
     }
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
 }
