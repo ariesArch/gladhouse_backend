@@ -25,7 +25,7 @@ class CreateDepartmentRequest extends FormRequest
     {
         return [
             'name_mm'=>'required',
-            'name_en'=>'required',
+            'name'=>'required',
             'description'=>'required'
 
         ];

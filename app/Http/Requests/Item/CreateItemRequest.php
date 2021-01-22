@@ -24,18 +24,19 @@ class CreateItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'=>'id',
-            'name'=>'name',
-            'name_mm'=>'name_mm',
-            'normal_quantity'=>'normal_quantity',
-            'normal_price'=>'normal_price',
-            'special_quantity'=>'special_quantity',
-            'special_price'=>'special_price',
-            'is_apply_special'=>'is_apply_special',
-            'is_single_discount'=>'is_single_discount',
-            'single_discount_percent'=>'single_discount_percent',
-            'cover'=>'cover',
-            'description'=>'description',
+            'item_category_id'=>'required',
+            'item_sub_category_id'=>'required',
+            'name'=>'required',
+            'name_mm'=>'required',
+            'normal_quantity'=>'required',
+            'normal_price'=>'required',
+            'special_quantity'=>'required',
+            'special_price'=>'required',
+            'is_apply_special'=>'required',
+            // 'is_single_discount'=>'required',
+            // 'single_discount_percent'=>'required',
+            // 'cover'=>'required',
+            // 'description'=>'required',
         ];
     }
 }

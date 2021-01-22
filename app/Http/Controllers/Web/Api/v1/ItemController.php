@@ -7,6 +7,7 @@ use App\Http\Requests\Item\CreateItemRequest;
 use App\Http\Resources\Item\ItemCollection;
 use App\Http\Resources\Item\ItemResource;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Repositories\Web\Api\v1\ItemRepository;
 
 class ItemController extends Controller
@@ -29,6 +30,7 @@ class ItemController extends Controller
     public function store(CreateItemRequest $request)
     {
         $item = $this->itemRepo->create($request->all());
+        // dd($request->all());
         if(!$item) {
             return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
