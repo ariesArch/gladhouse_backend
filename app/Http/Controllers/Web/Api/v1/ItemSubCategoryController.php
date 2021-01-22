@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Web\Api\v1;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Http\Requests\ItemSubCategory\CreateCityRequest;
-use App\Http\Requests\ItemSubCategory\UpdateCityRequest;
+use App\Http\Requests\ItemSubCategory\CreateItemSubCategoryRequest;
+use App\Http\Requests\ItemSubCategory\UpdateItemSubCategoryRequest;
 use App\Http\Resources\ItemSubCategory\ItemSubCategoryCollection;
 use App\Http\Resources\ItemSubCategory\ItemSubCategoryResource;
 use App\Repositories\Web\Api\v1\ItemSubCategoryRepository;
@@ -21,33 +21,39 @@ class ItemSubCategoryController extends Controller
     }
     public function index()
     {
-        $itemsub =$this->itemsubRepo->all();
-        if(!$itemsub){
+        // $item_sub_categories =$this->itemsubRepo->all();
+        // if(!$item_sub_categories){
+        //     return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        // }
+        // return new ItemSubCategoryCollection($item_sub_categories->load(['itemcategory']));
+        $item_sub_categories =  $this->itemsubRepo->all();
+        if (!$item_sub_categories) {
             return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new ItemSubCategoryCollection($itemsub);
+        return new ItemSubCategoryCollection($item_sub_categories->load(['item_category']));
     }
-    public function store(CreateItemSubCategoryRequest $REQUEST)
+    public function store(CreateItemSubCategoryRequest $request)
     {
-        $itemsub =$this->itemsubRepo->all();
-        if(!$itemsub){
+        $item_sub_category =$this->itemsubRepo->create($request->all());
+        if(!$item_sub_category){
             return response() ->json(['error' => 'Someting went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new ItemSubCategoryResource($itemsub);
+        return new ItemSubCategoryResource($item_sub_category->load(['item_category']));
     }
+
     public function show($id) {
-        $itemsub = $this->itemsubRepo->find($id);
-        if (!$itemsub) {
+        $item_sub_category= $this->itemsubRepo->find($id);
+        if (!$item_sub_category) {
             return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new ItemSubCategoryResource($itemsub);
+        return new ItemSubCategoryResource($item_sub_category->load(['item_category']));
     }
-    public function update($id, UpdateCityRequest $request) {
-        $itemsub = $this->itemsubRepo->update($id,$request->all());
-        if (!$itemsub) {
+    public function update($id, UpdateItemSubCategoryRequest $request) {
+        $item_sub_categories = $this->itemsubRepo->update($id,$request->all());
+        if (!$item_sub_categories) {
             return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new ItemSubCategoryResource($itemsub);
+        return new ItemSubCategoryResource($item_sub_category->load(['item_category']));
     }
     public function destroy($id) {
         $deleted = $this->itemsubRepo->delete($id);

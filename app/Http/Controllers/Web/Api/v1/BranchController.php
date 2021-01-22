@@ -24,7 +24,7 @@ class BranchController extends Controller
         if (!$branches) {
             return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new BranchCollection($branches);
+        return new BranchCollection($branches->load(['city', 'zone']));
     }
     public function store(CreateBranchRequest $request)
     {
@@ -32,7 +32,7 @@ class BranchController extends Controller
         if (!$branches) {
             return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new BranchResource($branches);
+        return new BranchResource($branches->load(['city', 'zone']));
     }
     public function show($id)
     {
@@ -40,7 +40,7 @@ class BranchController extends Controller
         if (!$branch) {
             return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new BranchResource($branch);
+        return new BranchResource($branch->load(['city', 'zone']));
     }
     public function update($id, UpdateBranchRequest $request)
     {
@@ -48,7 +48,7 @@ class BranchController extends Controller
         if (!$branches) {
             return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new BranchResource($branches);
+        return new BranchResource($branches->load(['city', 'zone']));
     }
     public function destory($id)
     {

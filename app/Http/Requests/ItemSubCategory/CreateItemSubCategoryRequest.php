@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\ItemSubCategory;
 
+// use App\Http\Requests\FormRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateItemSubCategoryRequest extends FormRequest
@@ -25,7 +26,8 @@ class CreateItemSubCategoryRequest extends FormRequest
     {
         return [
             //
-            'name'=>'required|unique:itemsub,name'
+            'name'=>'required|unique:item_sub_categories,name'
+            
         ];
     }
 }

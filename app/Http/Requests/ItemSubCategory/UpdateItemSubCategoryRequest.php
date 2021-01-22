@@ -25,7 +25,7 @@ class UpdateItemSubCategoryRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|string|unique:itemsub,name',
+            'name' => 'required|string|unique:item_sub_categories,name',
         ];
     }
 }

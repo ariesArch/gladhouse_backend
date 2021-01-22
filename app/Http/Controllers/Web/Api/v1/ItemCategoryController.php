@@ -20,35 +20,35 @@ class ItemCategoryController extends Controller
     }
     public function index()
     {
-        $itemcategories = $this->itemCategoryRepo->all();
-        if (!$itemcategories) {
+        $item_categories = $this->itemCategoryRepo->all();
+        if (!$item_categories) {
             return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new ItemCategoryCollection($itemcategories);
+        return new ItemCategoryCollection($item_categories);
     }
     public function store(CreateItemCategoryRequest $request)
     {
-        $itemcategory = $this->itemCategoryRepo->create($request->all());
-        if (!$itemcategory) {
+        $item_category = $this->itemCategoryRepo->create($request->all());
+        if (!$item_category) {
             return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new ItemCategoryResource($itemcategory);
+        return new ItemCategoryResource($item_category);
     }
     public function show($id)
     {
-        $itemcategory = $this->itemCategoryRepo->find($id);
-        if (!$itemcategory) {
+        $item_category = $this->itemCategoryRepo->find($id);
+        if (!$item_category) {
             return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new ItemCategoryResource($itemcategory);
+        return new ItemCategoryResource($item_category);
     }
     public function update($id, UpdateItemCategoryRequest $request)
     {
-        $itemcategory = $this->itemCategoryRepo->update($id, $request->all());
-        if (!$itemcategory) {
+        $item_category = $this->itemCategoryRepo->update($id, $request->all());
+        if (!$item_category) {
             return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return new ItemCategoryResource($itemcategory);
+        return new ItemCategoryResource($item_category);
     }
     public function destroy($id)
     {
