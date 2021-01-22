@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class City extends Model
 {
     use SoftDeletes;
-    protected $casts = ['is_available_d2d'=>'boolean'];
+    protected $casts = ['is_available_d2d' => 'boolean'];
     protected $fillable = [
-        'name', 'name_mm','is_available_d2d'
+        'name', 'name_mm', 'is_available_d2d', 'description'
     ];
     public function zones()
     {
