@@ -15,9 +15,9 @@ class CreateItemSubCategoriesTable extends Migration
     {
         Schema::create('item_sub_categories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('item_category_id');
+            $table->unsignedBigInteger('item_category_id')->nullable();
             $table->string('name')->unique();
-            $table->string('name_mm')->unique()->nullable();;
+            $table->string('name_mm')->unique()->nullable();
             $table->boolean('is_discount')->default(0);
             $table->longText('description')->nullable();
             $table->timestamps();

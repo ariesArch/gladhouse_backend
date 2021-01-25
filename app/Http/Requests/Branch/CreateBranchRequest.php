@@ -24,7 +24,7 @@ class CreateBranchRequest extends FormRequest
     public function rules()
     {
         return [
-            'name_mm' => 'required'
+            'name' => 'required|unique:branches,name'
         ];
     }
 }

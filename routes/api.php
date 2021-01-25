@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\Api\v1\ItemCategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,13 +29,11 @@ Route::group(['namespace'=>'Web\Api\v1','prefix'=>'v1'],function(){
     Route::ApiResource('items', 'ItemController');
     Route::ApiResource('staffs', 'StaffController');
     Route::ApiResource('departments', 'DepartmentController');
-
 });
 Route::group([
 	'namespace'=>'Web\Api\v1',
 	'middleware' => ['api', 'auth:api'],
 	'prefix' => 'v1/auth'
-
 ], function () {
 	Route::post('login', 'AuthController@login')->withoutMiddleware(['auth:api']);
 	Route::post('logout', 'AuthController@logout');

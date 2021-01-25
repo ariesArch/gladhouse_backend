@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\Web\Api\v1;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Models\Department;
+use App\Http\Requests\Department\CreateDepartmentRequest;
+use App\Http\Requests\Department\UpdateDepartmentRequest;
+use App\Http\Resources\Department\DepartmentCollection;
+use App\Http\Resources\Department\DepartmentResource;
+use App\Repositories\Web\Api\v1\DepartmentRepository;
 
 class DepartmentController extends Controller
 {
@@ -12,80 +18,49 @@ class DepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $departmentRepo;
+    public function __construct(DepartmentRepository $departmentRepo) {
+        $this->departmentRepo = $departmentRepo;
+    }
     public function index()
     {
-        //
-        $departments=Department::all();
-        return $departments;
+        $departments=  $this->departmentRepo->all();
+        if(!$departments) {
+            return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        return new DepartmentCollection($departments);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(CreateDepartmentRequest $request)
     {
-        $department = new Department;
-        $department->name_mm = $request->name_mm;
-        $department->name_en = $request->name_en;
-        $department->description = $request->description;
-        return response()->json($department);
+        $department = $this->departmentRepo->create($request->all());
+        if (!$department) {
+            return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        return new DepartmentResource($department);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $department = $this->departmentRepo->find($id);
+        if (!$department) {
+            return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        return new DepartmentResource($department);
+    }
+     public function update($id, UpdateDepartmentRequest $request) {
+        $department = $this->departmentRepo->update($id,$request->all());
+        if (!$department) {
+            return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        return new DepartmentResource($department);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id) {
+        $deleted = $this->departmentRepo->delete($id);
+        if (!$deleted) {
+            return response()->json(['error' => 'Something went wrong'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        return response()->json(['status' => 1,'message'=>'City was deleted'], Response::HTTP_OK);
     }
 }
