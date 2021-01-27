@@ -16,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/itemcategories', 'ItemCategoryController@index');
+Route::Resource('cities', 'CityController');
+

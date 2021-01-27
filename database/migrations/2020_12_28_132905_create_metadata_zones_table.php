@@ -15,11 +15,15 @@ class CreateMetadataZonesTable extends Migration
     {
         Schema::create('zones', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('city_id');
-            $table->string('name_mm');
-            $table->string('name_en');
-            $table->longText('description');
+            $table->unsignedBigInteger('city_id');
+            $table->string('name')->unique();
+            $table->string('name_mm')->unique()->nullable();;
+            $table->boolean('is_deliver')->default(0);
+            $table->longText('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('restrict');
         });
     }
 
@@ -30,6 +34,8 @@ class CreateMetadataZonesTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('zones');
+        Schema::enableForeignKeyConstraints();
     }
 }

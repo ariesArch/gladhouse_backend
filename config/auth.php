@@ -42,8 +42,8 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
+            'driver' => 'jwt',
+            'provider' => 'staffs',
             'hash' => false,
         ],
     ],
@@ -68,8 +68,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Models\User::class,
         ],
+        'staffs'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\Staff::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',
