@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
 // Route::get('zones/{zone}', 'ZoneController@show');
 // Route::post('/v1/auth/login','Web\Api\v1\AuthController@login');
 Route::group(['namespace'=>'Web\Api\v1','prefix'=>'v1'],function(){
