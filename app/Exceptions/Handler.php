@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 use Throwable;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class Handler extends ExceptionHandler
 {
@@ -76,7 +77,11 @@ class Handler extends ExceptionHandler
                 'status' => 2,
                 'message' => $message,
             ], Response::HTTP_OK);
-        }
+		}
+		// jwt 
+		if ($exception instanceof JWTException) {
+			return response(['status' => 3, 'message' => 'Token is not provided'], Response::HTTP_OK);
+		}
         return parent::render($request, $exception);
     }
 }
