@@ -27,6 +27,9 @@ Route::group(['namespace'=>'Web\Api\v1','prefix'=>'v1','middleware'=>['jwt.auth'
     Route::ApiResource('items', 'ItemController');
     Route::ApiResource('staffs', 'StaffController');
     Route::ApiResource('departments', 'DepartmentController');
+    Route::ApiResource('itemsubcategories', 'ItemSubCategoryController');
+    Route::ApiResource('itemcategories', 'ItemCategoryController');
+
 });
 // Route::group([
 // 	'namespace'=>'Web\Api\v1',
